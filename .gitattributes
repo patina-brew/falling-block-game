@@ -1,0 +1,19 @@
+# フックは sh で実行するため、改行を LF に固定する。
+/.githooks/** text eol=lf
+
+# OpenSpec の部分を切り離して納品する場合に、git archive で納品物から除くファイル。
+# OpenSpec の部分も含めて納品する場合は、git archive を使わずに渡すか、次の行を消す。
+# プロダクトでも package.json を使う場合は、package.json と package-lock.json の行を消す。
+# .vscode/settings.json にプロジェクトの設定を足した場合は、その行を消す。
+/.githooks export-ignore
+/.github/skills export-ignore
+/.claude/skills export-ignore
+/.agents/skills export-ignore
+/.vscode/settings.json export-ignore
+/openspec export-ignore
+/scripts/openspec-trace.mjs export-ignore
+/AGENTS.md export-ignore
+/CLAUDE.md export-ignore
+/.openspec-template export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore

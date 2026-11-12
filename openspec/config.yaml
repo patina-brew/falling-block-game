@@ -1,0 +1,44 @@
+# ==== 共通部分ここから: テンプレートの更新時に置き換え、プロジェクトでは編集しない ====
+schema: ears-bdd
+
+# context はすべての成果物と apply、archive に注入される。
+context: |
+  すべての作業に共通するルールと表記は AGENTS.md に従う。
+
+  文書の関係(openspec/ からの相対パス):
+  - specs/: 要件の正本を置く。specs/README.md に仕様書の一覧と関係を記載する。
+  - manual-checks.md: 実機確認が必要なシナリオと確認結果を管理する。
+  - traceability.md: 全体検証のたびに自動で作り直す台帳である。コミットせず、編集せず、作業前に読む必要もない。
+  - 前提の文書(product.md、tech.md、structure.md)は判断の基準、specs は要件、design は今回の判断、tasks は作業と完了条件を正とする。
+  - 前提の文書の内容を成果物に複写せず、`openspec/tech.md` の 技術上の判断基準 のように、パスと節の名前で参照する。前提の文書への相対リンクは、アーカイブで切れるため使わない。
+
+  ID:
+  - 機能要件は REQ-001、非機能要件は NREQ-001、シナリオは REQ-001-S01、設計判断は D-01 の形式とする。
+  - REQ、NREQ、シナリオの番号は、正式仕様、進行中の変更、アーカイブの最大番号の次を採番する。番号は `node scripts/openspec-trace.mjs next-id` で確認する。
+  - 採番済みのIDは削除や廃止の後も再利用せず、既存の要件やシナリオを変更する場合もIDを維持する。
+  - 要件を別の capability へ移す場合は、同じ変更で移動元を REMOVED、移動先を ADDED にし、要件とシナリオのIDを維持する。
+
+  成果物の原則:
+  - 実装中に仕様や設計とのずれが分かった場合や、未決事項に回答を得た場合は、コードより先に update で成果物を更新する。
+  - アーカイブは仕様、実装、テストの一致を意味し、運用開始の承認は意味しない。
+
+operations:
+  apply:
+    guidance:
+      - 開始前に proposal.md の未決事項を確認し、"停止:" の項目が残っていれば実装せず利用者に確認する。
+  archive:
+    guidance:
+      - verify で WARNING 以上の指摘がある場合は、利用者に示して対応を決めてからアーカイブする。
+      - 差分仕様を正式仕様へ同期する前に、`npx --no-install openspec validate <変更名> --strict` と `node scripts/openspec-trace.mjs check --strict --change <変更名>` を実行し、失敗した場合はアーカイブしない。
+
+# Copilot のクラウドエージェント用ファイルを生成しない。
+githubCopilot:
+  cloudAgent: false
+# ==== 共通部分ここまで ====
+
+# ==== プロジェクト固有の部分: 対象の成果物を作るときだけ注入される ====
+# rules:
+#   specs:
+#     - {{例: 日付を扱う要件では、非稼働日と期限切れの扱いを定義する。}}
+#   design:
+#     - {{例: Extension と Webview の通信境界への影響を検討する。}}

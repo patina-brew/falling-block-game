@@ -1,0 +1,17 @@
+{
+  "name": "falling-block-game",
+  "version": "1.0.0",
+  "description": "{{このリポジトリが何かを1行で}}",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "check": "npx --no-install openspec validate --specs --strict && node scripts/openspec-trace.mjs check && node scripts/openspec-trace.mjs generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@fission-ai/openspec": "^1.16.0"
+  }
+}

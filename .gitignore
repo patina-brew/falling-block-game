@@ -1,0 +1,4 @@
+# OpenSpec テンプレートが使うもの
+# 言語やツールごとのものは、この下に追加する。
+node_modules/
+openspec/traceability.md

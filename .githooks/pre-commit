@@ -1,0 +1,4 @@
+#!/bin/sh
+# コミット前に全体検証(npm run check)を実行する。
+# 検査を足す場合は、このファイルではなく package.json の check に追加する。
+exec npm run check
